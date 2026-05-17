@@ -1,0 +1,34 @@
+body {
+
+    background: #fff0f5;
+
+    font-family: Arial;
+
+    padding: 30px;
+
+    color: #5a0035;
+}
+
+h1 {
+
+    color: #d63384;
+}
+
+h2 {
+
+    color: #8b004f;
+}
+
+h3 {
+
+    color: #b30059;
+}
+
+div {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+}
