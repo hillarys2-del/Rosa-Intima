@@ -1,67 +1,83 @@
 <?php
 
-    require_once "Produto.php";
-    require_once "Categoria.php";
-    require_once "Carrinho.php";
-    require_once "Pedido.php";
-    require_once "Cliente.php";
+require_once "Produto.php";
+require_once "Pedido.php";
+require_once "Cliente.php";
+require_once "Pagamento.php";
+require_once "Entrega.php";
 
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
+$nome = $_POST['nome'];
 
-        $produtoNome = $_POST['produto'];
+$email = $_POST['email'];
 
-        $quantidade = $_POST['quantidade'];
+$produtoNome = $_POST['produto'];
 
-            if($produtoNome == "Vela Aromática") {
+$quantidade = $_POST['quantidade'];
 
-                $produto = new Produto(
-                    "Vela Aromática",
-                    39.90,
-                    "Aroma relaxante e sofisticado"
-                );
+if($produtoNome == "Vela Aromática") {
 
-            } else if($produtoNome == "Lingerie Vermelha") {
+    $produto = new Produto(
+        "Vela Aromática",
+        39.90,
+        "Aroma relaxante e sofisticado",
+        "Acessórios",
+        15
+    );
 
-                $produto = new Produto(
-                    "Lingerie Vermelha",
-                    79.90,
-                    "Conjunto elegante e confortável"
-                );
+} else if($produtoNome == "Lingerie Vermelha") {
 
-            } else {
+    $produto = new Produto(
+        "Lingerie Vermelha",
+        79.90,
+        "Conjunto elegante e confortável",
+        "Lingeries",
+        10
+    );
 
-                $produto = new Produto(
-                    "Kit Sensual",
-                    129.90,
-                    "Itens selecionados para casais"
-                );
-            }
+} else {
 
-        $categoria = new Categoria(
-            "Produtos Sensuais",
-            "Linha Premium"
-        );
+    $produto = new Produto(
+        "Kit Sensual",
+        129.90,
+        "Itens selecionados para casais",
+        "Kits",
+        5
+    );
+}
 
-        $carrinho = new Carrinho(
-            $produto,
-            $categoria,
-            $quantidade
-        );
+$cliente = new Cliente(
+    $nome,
+    $email,
+    "41999999999",
+    "123456"
+);
 
-        $pedido = new Pedido(
-            rand(1000,9999),
-            "Pagamento aprovado",
-            $carrinho
-        );
+$pagamento = new Pagamento(
+    "Pix",
+    "Aguardando"
+);
 
-        $cliente = new Cliente(
-            $nome,
-            $email
-        );
+$pagamento->confirmarPagamento();
 
-        $produto->exibirProduto();
+$entrega = new Entrega(
+    "Rua das Rosas, 120",
+    "3 dias úteis",
+    "Preparando envio"
+);
 
-        $categoria->exibirCategoria();
+$pedido = new Pedido(
+    date("d/m/Y"),
+    "Pedido confirmado",
+    $cliente,
+    $pagamento,
+    $entrega
+);
 
-        $cliente->comprar($pedido);
+for($i = 0; $i < $quantidade; $i++) {
+
+    $pedido->adicionarProduto($produto);
+}
+
+$cliente->finalizarCompra($pedido);
+
+?>
