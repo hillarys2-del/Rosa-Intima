@@ -24,14 +24,46 @@ class Produto {
     }
 
     public function getNome() {
+
         return $this->nome;
     }
 
     public function getPreco() {
+
         return $this->preco;
     }
 
+    public function atualizarPreco($novoPreco) {
+
+        $this->preco = $novoPreco;
+    }
+
+    public function atualizarEstoque($quantidade) {
+
+        $this->estoque -= $quantidade;
+    }
+
+    public function verificarDisponibilidade() {
+
+        if($this->estoque > 0) {
+
+            return "Disponível";
+        }
+
+        return "Indisponível";
+    }
+
+    public function aplicarDesconto($porcentagem) {
+
+        $desconto =
+        ($this->preco * $porcentagem) / 100;
+
+        $this->preco -= $desconto;
+    }
+
     public function exibirDetalhes() {
+
+        echo "<div>";
 
         echo "<h3>{$this->nome}</h3>";
 
@@ -41,6 +73,14 @@ class Produto {
 
         echo "Descrição: {$this->descricao}<br>";
 
-        echo "Estoque: {$this->estoque}<br><br>";
+        echo "Estoque: {$this->estoque}<br>";
+
+        echo "Status: " .
+        $this->verificarDisponibilidade() .
+        "<br><br>";
+
+        echo "</div>";
     }
 }
+
+?>
