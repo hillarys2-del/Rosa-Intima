@@ -10,10 +10,10 @@ class Pagamento {
         $this->tipoPagamento = $tipoPagamento;
         $this->status = $status;
     }
+    
+    public function getTipoPagamento() {
 
-    public function confirmarPagamento() {
-
-        $this->status = "Pagamento aprovado";
+        return $this->tipoPagamento;
     }
 
     public function getStatus() {
@@ -21,8 +21,18 @@ class Pagamento {
         return $this->status;
     }
 
-    public function getTipo() {
+    public function setTipoPagamento($tipoPagamento) {
 
-        return $this->tipoPagamento;
+        $this->tipoPagamento = $tipoPagamento;
+    }
+
+    public function setStatus($status) {
+
+        $this->status = $status;
+    }
+    
+    public function confirmarPagamento() {
+
+        $this->status = "Pagamento aprovado";
     }
 }
