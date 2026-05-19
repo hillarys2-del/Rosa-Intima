@@ -35,6 +35,71 @@ class Pedido {
         $this->entrega = $entrega;
     }
 
+    public function getData() {
+
+        return $this->data;
+    }
+
+    public function getStatus() {
+
+        return $this->status;
+    }
+
+    public function getValorTotal() {
+
+        return $this->valorTotal;
+    }
+
+    public function getCliente() {
+
+        return $this->cliente;
+    }
+
+    public function getPagamento() {
+
+        return $this->pagamento;
+    }
+
+    public function getEntrega() {
+
+        return $this->entrega;
+    }
+
+    public function getProdutos() {
+
+        return $this->produtos;
+    }
+
+    public function setData($data) {
+
+        $this->data = $data;
+    }
+
+    public function setStatus($status) {
+
+        $this->status = $status;
+    }
+
+    public function setValorTotal($valorTotal) {
+
+        $this->valorTotal = $valorTotal;
+    }
+
+    public function setCliente($cliente) {
+
+        $this->cliente = $cliente;
+    }
+
+    public function setPagamento($pagamento) {
+
+        $this->pagamento = $pagamento;
+    }
+
+    public function setEntrega($entrega) {
+
+        $this->entrega = $entrega;
+    }
+
     public function adicionarProduto($produto) {
 
         $this->produtos[] = $produto;
@@ -68,7 +133,7 @@ class Pedido {
         echo "Status: {$this->status}<br>";
 
         echo "Pagamento: " .
-        $this->pagamento->getTipo() . "<br><br>";
+        $this->pagamento->getTipoPagamento() . "<br><br>";
 
         echo "<h3>Produtos</h3>";
 
