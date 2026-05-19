@@ -33,6 +33,46 @@ class Produto {
         return $this->preco;
     }
 
+    public function getDescricao() {
+
+        return $this->descricao;
+    }
+
+    public function getCategoria() {
+
+        return $this->categoria;
+    }
+
+    public function getEstoque() {
+
+        return $this->estoque;
+    }
+
+    public function setNome($nome) {
+
+        $this->nome = $nome;
+    }
+
+    public function setPreco($preco) {
+
+        $this->preco = $preco;
+    }
+
+    public function setDescricao($descricao) {
+
+        $this->descricao = $descricao;
+    }
+
+    public function setCategoria($categoria) {
+
+        $this->categoria = $categoria;
+    }
+
+    public function setEstoque($estoque) {
+
+        $this->estoque = $estoque;
+    }
+
     public function atualizarPreco($novoPreco) {
 
         $this->preco = $novoPreco;
