@@ -17,6 +17,30 @@ class Entrega {
         $this->status = $status;
     }
 
+    public function getEndereco() {
+        return $this->endereco;
+    }
+
+    public function getPrazo() {
+        return $this->prazo;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function setEndereco($endereco) {
+        $this->endereco = $endereco;
+    }
+
+    public function setPrazo($prazo) {
+        $this->prazo = $prazo;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
     public function rastrearEntrega() {
 
         return $this->status;
