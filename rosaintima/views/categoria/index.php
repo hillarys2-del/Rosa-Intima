@@ -24,6 +24,7 @@
     />
     <script src="../../js/color-modes.js"></script>
     <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <meta name="theme-color" content="#712cf9" />
     <link href="../../css/dashboard.css" rel="stylesheet" />
     <style>
@@ -101,6 +102,7 @@
       }
     </style>
   </head>
+
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
@@ -367,10 +369,13 @@
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
-            <h1 class="h2">Gerenciamento de Categorias</h1>
+            <h1 class="h2">Gerenciamento de categorias</h1>
             
           </div>
-          
+          <p>
+            <a href="create.php"> Nova Categoria</a>
+          </p>
+
           <div class="table-responsive small">
             <table class="table table-hover">
                 <tr>
@@ -381,6 +386,14 @@
                     <tr>
                         <td><?= $categoria->getId() ?></td>
                         <td><?= $categoria->getDescricao() ?></td>
+                        <td>
+                          <a title="Editar" href="edit.php?id=<?= $categoria->getId() ?>">
+                            <i class="bi bi-pencil"></i>
+                          </a>
+                          <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $categoria->getId() ?>">
+                            <i class="bi bi-trash-fill"></i>
+                          </a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </table>

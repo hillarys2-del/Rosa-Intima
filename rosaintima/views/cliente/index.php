@@ -24,6 +24,7 @@
     />
     <script src="../../js/color-modes.js"></script>
     <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <meta name="theme-color" content="#712cf9" />
     <link href="../../css/dashboard.css" rel="stylesheet" />
     <style>
@@ -101,6 +102,7 @@
       }
     </style>
   </head>
+
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
@@ -382,6 +384,7 @@
                     <th>CPF</th>
                     <th>Email</th>
                     <th>Telefone</th>
+                    <th>Ações</th>
                 </tr>
                 <?php foreach($dao->read() as $cliente) : ?>
                     <tr>
@@ -390,6 +393,14 @@
                         <td><?= $cliente->getCpf() ?></td>
                         <td><?= $cliente->getEmail() ?></td>
                         <td><?= $cliente->getTelefone() ?></td>
+                        <td>
+                          <a title="Editar" href="edit.php?id=<?= $cliente->getId() ?>">
+                            <i class="bi bi-pencil"></i>
+                          </a>
+                          <a title="Excluir" class="link-danger" href="destroy.php?id=<?= $cliente->getId() ?>">
+                            <i class="bi bi-trash-fill"></i>
+                          </a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </table>
