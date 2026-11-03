@@ -4,10 +4,12 @@
     public function create($categoria) {
             try {
                 $query = BD::getConexao()->prepare(
-                    "INSERT INTO categoria(descricao) 
-                     VALUES (:d)"
+                    "INSERT INTO categoria(descricao, id_produto) 
+                     VALUES (:d, :c)"
                 );
-                $query->bindValue(':d', $categoria->getDescricao(),PDO::PARAM_STR);
+                $query->bindValue(':d', $categoria->getDescricao(), PDO::PARAM_STR);
+                //Bind para a chave estrangeira
+                $query->bindValue(':c', $categoria->getProduto()->getId(), PDO::PARAM_STR);
 
                 if(!$query->execute()){
                     print_r($query->errorInfo());
@@ -56,7 +58,7 @@
                 if($linha = $query->fetch(PDO::FETCH_ASSOC)) {
                     $categoria = new categoria(); //Classe bean
                     $categoria->setId($linha['id_categoria']);
-                    $categoria->getDescricao($linha['descricao']);
+                    $categoria->setDescricao($linha['descricao']);
                 }
                     return $categoria;
 
