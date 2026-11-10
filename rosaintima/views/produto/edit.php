@@ -3,6 +3,7 @@
 
     $dao = new ProdutoDAO();
     $produto = $dao->find($_GET['id']);
+    $daoCategoria = new CategoriaDAO();
 ?>
 
 <!doctype html>
@@ -373,23 +374,43 @@
           <div class="table-responsive small">
             <form action="update.php" method="post">
                 <div class="form-group">
-                    <label for="titulo">Nome</label>
-                    <input type="text" name="titulo" value="<?= $produto->getNome() ?>" class="form-control">
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" value="<?= $produto->getNome() ?>" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="ano_lancamento">Descrição</label>
-                    <input type="text" name="ano_lancamento" value="<?= $produto->getDescricao() ?>" class="form-control">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" name="descricao" value="<?= $produto->getDescricao() ?>" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="exemplares_disponiveis">Preço</label>
-                    <input type="exemplares_disponiveis" name="exemplares_disponiveis" value="<?= $produto->getPreco() ?>" class="form-control">
+                    <label for="preco">Preço</label>
+                    <input type="preco" name="preco" value="<?= $produto->getPreco() ?>" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="sinopse">Estoque</label>
-                    <textarea name="sinopse" class="form-control"><?= $produto->getEstoque() ?></textarea>
+                    <label for="estoque">Estoque</label>
+                    <textarea name="estoque" class="form-control"><?= $produto->getEstoque() ?></textarea>
                 </div>
 
-                <input type="hidden" name="id" value="<?= $produto->getId() ?>">
+                <div class="form-group">
+                  <label for="id_categoria">Categoria</label>
+                  <select name="id_categoria" class="form-control">
+                    <?php foreach($daoCategoria->read() as $categoria) : ?>
+                      <?php if($categoria->getId() == $produto->getCategoria()->getId()) : ?>
+                        <option selected value="<?= $categoria->getId() ?>">
+                          <?= $categoria->getDescricao() ?>
+                        </option>
+                      <?php else : ?>
+                        <option value="<?= $categoria->getId() ?>">
+                          <?= $categoria->getDescricao() ?>
+                        </option>
+                      <?php endif ?>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+
+          
+                <div>
+                  <input type="hidden" name="id" value="<?= $produto->getId() ?>">
+                </div>
 
                 <div class="form-group">
                     <input type="reset" value="Limpar" class="btn">

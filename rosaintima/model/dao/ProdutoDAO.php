@@ -81,6 +81,11 @@
                     $produto->setDescricao($linha['descricao']);
                     $produto->setPreco($linha['preco']);
                     $produto->setEstoque($linha['estoque']);
+                    //Atributo da associação (com Categoria)
+                    $daoCategoria = new CategoriaDAO();
+                    $categoria = $daoCategoria->find($linha['id_categoria']);
+                    $produto->setCategoria($categoria);
+
                 }
                 
                 return $produto;
@@ -94,15 +99,17 @@
             try {
                 $query = BD::getConexao()->prepare(
                     "UPDATE produto
-                    SET nome = :n, descricao = :d, preco = :p, estoque = :e, 
+                    SET nome = :n, descricao = :d, preco = :p, estoque = :e, id_categoria = :c 
                     WHERE id_produto = :i"
                 );
                 $query->bindValue(':n', $produto->getNome(), PDO::PARAM_STR);
                 $query->bindValue(':d', $produto->getDescricao(), PDO::PARAM_INT);
                 $query->bindValue(':e', $produto->getEstoque(), PDO::PARAM_STR);
                 $query->bindValue(':p', $produto->getPreco(), PDO::PARAM_INT);
+                $query->bindValue(':c', $produto->getCategoria()->getId(), PDO::PARAM_INT);
                 $query->bindValue(':i', $produto->getId(), PDO::PARAM_INT);
 
+               
                 if(!$query->execute()) {
                     print_r($query->errorInfo());
                 }

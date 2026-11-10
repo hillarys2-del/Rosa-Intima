@@ -12,6 +12,13 @@
     $produto->setEstoque($_POST['estoque']);
     $produto->setId($_POST['id']);
 
+    // Instanciar um objeto da Categoria
+    $categoria = new Categoria();
+    $categoria->setId($_POST['id_categoria']);
+
+    // Definir a categoria no filme
+    $produto->setCategoria($categoria);
+
     // Instanciar um objeto da classe produtoDAO
     $dao = new ProdutoDAO();
 

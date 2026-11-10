@@ -56,7 +56,7 @@
                 }
 
                 if($linha = $query->fetch(PDO::FETCH_ASSOC)) {
-                    $categoria = new categoria(); //Classe bean
+                    $categoria = new Categoria(); //Classe bean
                     $categoria->setId($linha['id_categoria']);
                     $categoria->setDescricao($linha['descricao']);
                 }
