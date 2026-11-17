@@ -5,7 +5,7 @@
     $id = $_GET['id'];
 
     // Instanciar um objeto da classe ClienteDAO
-    $dao = new ProdutoDAO();
+    $dao = new VendaDAO();
 
     // Invocar o método para excluir
     $dao->destroy($id);

@@ -8,9 +8,14 @@
     //Definir os valores dos atributos apartir do form
     $venda->setData_venda($_POST['data_venda']);
     $venda->setValor_total($_POST['valor_total']);
+    $venda->setForma_pagamento($_POST['forma_pagamento']);
      // Instanciar um objeto da Categoria
-    $categoria = new Categoria();
-    $categoria->setId($_POST['id_categoria']);
+
+    $cliente = new Cliente();
+    $cliente->setId($_POST['id_cliente']);
+
+    $funcionario = new Funcionario();
+    $funcionario->setId($_POST['id_funcionario']);
 
     // Definir a categoria no filme
     $venda->setFuncionario($funcionario);

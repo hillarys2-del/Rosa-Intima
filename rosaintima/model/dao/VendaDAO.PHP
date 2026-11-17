@@ -4,13 +4,14 @@
     public function create($venda) {
             try {
                 $query = BD::getConexao()->prepare(
-                    "INSERT INTO venda(data_venda, valor_total, id_funcionario, id_cliente) 
-                     VALUES (:d, :v, :f, :c)"
+                    "INSERT INTO venda(data_venda, valor_total, forma_pagamento, id_funcionario, id_cliente) 
+                     VALUES (:d, :v, :p, :f, :c)"
                 );
                 $query->bindValue(':d', $venda->getData_venda(), PDO::PARAM_STR);
-                $query->bindValue(':d', $venda->getValor_total(), PDO::PARAM_STR);
+                $query->bindValue(':v', $venda->getValor_total(), PDO::PARAM_STR);
+                $query->bindValue(':p', $venda->getForma_pagamento(), PDO::PARAM_STR);
                 //Bind para a chave estrangeira
-                $query->bindValue(':c', $venda->getFuncionario()->getId(), PDO::PARAM_STR);
+                $query->bindValue(':f', $venda->getFuncionario()->getId(), PDO::PARAM_STR);
                 $query->bindValue(':c', $venda->getCliente()->getId(), PDO::PARAM_STR);
 
                 if(!$query->execute()){
@@ -36,6 +37,7 @@
                     $venda->setId($linha['id_venda']);
                     $venda->setData_venda($linha['data_venda']);
                     $venda->setValor_total($linha['valor_total']);
+                    $venda->setForma_pagamento($linha['forma_pagamento']);
 
                     array_push($listaVendas, $venda);
 
@@ -63,6 +65,7 @@
                     $venda->setId($linha['id_venda']);
                     $venda->setData_venda($linha['data_venda']);
                     $venda->setValor_total($linha['valor_total']);
+                    $venda->setForma_pagamento($linha['forma_pagamento']);
                 }
                     return $venda;
 
@@ -77,11 +80,13 @@
             try {
                 $query = BD::getConexao()->prepare(
                     "UPDATE venda
-                    SET id = :i, data_venda = :d, valor_total = :v
+                    SET data_venda = :d, valor_total = :v, forma_pagamento = :p,
                     WHERE id_venda = :i"
                 );
-                $query->bindValue(':d', $data_venda->getData_venda(),PDO::PARAM_INT);
-                $query->bindValue(':v', $valor_total->getValor_total(),PDO::PARAM_STR);
+                $query->bindValue(':d', $venda->getData_venda(),PDO::PARAM_INT);
+                $query->bindValue(':v', $venda->getValor_total(),PDO::PARAM_STR);
+                $query->bindValue(':p', $venda->getForma_pagamento(),PDO::PARAM_STR);
+                $query->bindValue(':i', $venda->getId(),PDO::PARAM_INT);
 
                 if(!$query->execute()){
                     print_r($query->errorInfo());

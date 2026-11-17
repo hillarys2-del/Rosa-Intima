@@ -1,9 +1,10 @@
 <?php
-    class Categoria {
+    class Venda {
         // Atributos
         private $id;
         private $data_venda;
         private $valor_total; //Associação com a classe Funcionário e Cliente
+        private $forma_pagamento;
         private $funcionario;
         private $cliente;
 
@@ -30,6 +31,14 @@
 
         public function setValor_total($valor_total) {
             $this->valor_total = $valor_total;
+        }
+
+        public function getForma_pagamento() {
+            return $this->forma_pagamento;
+        }
+
+        public function setForma_pagamento($forma_pagamento) {
+            $this->forma_pagamento = $forma_pagamento;
         }
 
         // Get e Set do atributo de associação

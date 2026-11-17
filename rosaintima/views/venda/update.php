@@ -8,6 +8,7 @@
     // Definir os valores dos atributos a partir do form
     $venda->setData_venda($_POST['data_venda']);
     $venda->setValor_total($_POST['valor_total']);
+    $venda->setForma_pagamento($_POST['forma_pagamento']);
     $venda->setId($_POST['id']);
 
     // Instanciar um objeto da classe VendaDAO
