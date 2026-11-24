@@ -396,6 +396,53 @@
                 </div>
 
                 <div class="form-group">
+                            <label for="id_funcionario">Nome do Funcionário</label>
+                            <select name="id_funcionario"
+                                    id="id_funcionario"
+                                    class="form-control"
+                                    required>
+                                <option value="">Selecione o funcionário</option>
+
+                                <?php
+                                    $funcionarioDAO = new FuncionarioDAO();
+                                    $funcionarios = $funcionarioDAO->read();
+
+                                    foreach ($funcionarios as $funcionario) {
+                                ?>
+                                    <option value="<?= $funcionario->getId(); ?>">
+                                        <?= $funcionario->getNome(); ?>
+                                    </option>
+                                <?php } ?>
+                            </select>    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_cliente">Nome do Cliente</label>
+                            <select name="id_cliente"
+                                    id="id_cliente"
+                                    class="form-control"
+                                    required>
+
+                                    <option value="">Selecione o cliente</option>
+
+                                <?php
+                                    $clienteDAO = new ClienteDAO();
+                                    $clientes = $clienteDAO->read();
+
+                                    foreach ($clientes as $cliente) {
+                                ?>
+                                    <option value="<?= $cliente->getId(); ?>">
+                                        <?= $cliente->getNome(); ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                <div>
+                  <input type="hidden" name="id" value="<?= $venda->getId() ?>">
+                </div>
+
+                <div class="form-group">
                     <input type="reset" value="Limpar" class="btn">
                     <input type="submit" value="Salvar" class="btn btn-success">
                 </div>

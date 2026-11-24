@@ -383,6 +383,8 @@
                     <th>Data da venda</th>
                     <th>Valor total</th>
                     <th>Forma de pagamento</th>
+                    <th>Nome do Funcionário</th>
+                    <th>Nome do Cliente</th>
                 </tr>
                 <?php foreach($dao->read() as $venda) : ?>
                     <tr>
@@ -390,6 +392,8 @@
                         <td><?= $venda->getData_venda() ?></td>
                         <td><?= $venda->getValor_total() ?></td>
                         <td><?= $venda->getForma_pagamento() ?></td>
+                        <td><?= $venda->getFuncionario()->getNome(); ?></td>
+                        <td><?= $venda->getCliente()->getNome(); ?></td>
                         <td>
                           <a title="Editar" href="edit.php?id=<?= $venda->getId() ?>">
                             <i class="bi bi-pencil"></i>

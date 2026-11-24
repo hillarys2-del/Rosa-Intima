@@ -1,3 +1,6 @@
+<?php
+    require "../../autoload.php";
+?>
 
 <!doctype html>
 <html lang="pt-BR" data-bs-theme="auto">
@@ -130,15 +133,48 @@
                                 <option value="Cartão">Cartão</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
-                            <label for="id_funcionario">Funcionário</label>
-                            <input type="text" name="id_funcionario" class="form-control">
+                            <label for="id_funcionario">Nome do Funcionário</label>
+                            <select name="id_funcionario"
+                                    id="id_funcionario"
+                                    class="form-control"
+                                    required>
+                                <option value="">Selecione o funcionário</option>
+
+                                <?php
+                                    $funcionarioDAO = new FuncionarioDAO();
+                                    $funcionarios = $funcionarioDAO->read();
+
+                                    foreach ($funcionarios as $funcionario) {
+                                ?>
+                                    <option value="<?= $funcionario->getId(); ?>">
+                                        <?= $funcionario->getNome(); ?>
+                                    </option>
+                                <?php } ?>
+                            </select>    
                         </div>
 
                         <div class="form-group">
-                            <label for="id_cliente">Cliente</label>
-                            <input type="text" name="id_cliente" class="form-control">
+                            <label for="id_cliente">Nome do Cliente</label>
+                            <select name="id_cliente"
+                                    id="id_cliente"
+                                    class="form-control"
+                                    required>
+
+                                    <option value="">Selecione o cliente</option>
+
+                                <?php
+                                    $clienteDAO = new ClienteDAO();
+                                    $clientes = $clienteDAO->read();
+
+                                    foreach ($clientes as $cliente) {
+                                ?>
+                                    <option value="<?= $cliente->getId(); ?>">
+                                        <?= $cliente->getNome(); ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
                         </div>
 
                         <div class="form-group">

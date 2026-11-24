@@ -11,8 +11,8 @@
                 $query->bindValue(':v', $venda->getValor_total(), PDO::PARAM_STR);
                 $query->bindValue(':p', $venda->getForma_pagamento(), PDO::PARAM_STR);
                 //Bind para a chave estrangeira
-                $query->bindValue(':f', $venda->getFuncionario()->getId(), PDO::PARAM_STR);
-                $query->bindValue(':c', $venda->getCliente()->getId(), PDO::PARAM_STR);
+                $query->bindValue(':f', $venda->getFuncionario()->getId(), PDO::PARAM_INT);
+                $query->bindValue(':c', $venda->getCliente()->getId(), PDO::PARAM_INT);
 
                 if(!$query->execute()){
                     print_r($query->errorInfo());
@@ -38,6 +38,16 @@
                     $venda->setData_venda($linha['data_venda']);
                     $venda->setValor_total($linha['valor_total']);
                     $venda->setForma_pagamento($linha['forma_pagamento']);
+                    //Atributo da associação (com cliente)
+                    $daoFuncionario = new FuncionarioDAO();
+                    $funcionario = $daoFuncionario->find($linha['id_funcionario']);
+                    $venda->setFuncionario($funcionario);
+                    
+                    
+                    //Atributo da associação (com cliente)
+                    $daoCliente = new ClienteDAO();
+                    $cliente = $daoCliente->find($linha['id_cliente']);
+                    $venda->setCliente($cliente);
 
                     array_push($listaVendas, $venda);
 
@@ -66,6 +76,16 @@
                     $venda->setData_venda($linha['data_venda']);
                     $venda->setValor_total($linha['valor_total']);
                     $venda->setForma_pagamento($linha['forma_pagamento']);
+                   //Atributo da associação (com cliente)
+                    $daoFuncionario = new FuncionarioDAO();
+                    $funcionario = $daoFuncionario->find($linha['id_funcionario']);
+                    $venda->setFuncionario($funcionario);
+                    
+                    
+                    //Atributo da associação (com cliente)
+                    $daoCliente = new ClienteDAO();
+                    $cliente = $daoCliente->find($linha['id_cliente']);
+                    $venda->setCliente($cliente);
                 }
                     return $venda;
 
@@ -80,12 +100,14 @@
             try {
                 $query = BD::getConexao()->prepare(
                     "UPDATE venda
-                    SET data_venda = :d, valor_total = :v, forma_pagamento = :p,
+                    SET data_venda = :d, valor_total = :v, forma_pagamento = :p, id_cliente =:c, id_funcionario =:f
                     WHERE id_venda = :i"
                 );
                 $query->bindValue(':d', $venda->getData_venda(),PDO::PARAM_INT);
                 $query->bindValue(':v', $venda->getValor_total(),PDO::PARAM_STR);
                 $query->bindValue(':p', $venda->getForma_pagamento(),PDO::PARAM_STR);
+                $query->bindValue(':f', $venda->getFuncionario()->getId(),PDO::PARAM_INT);
+                $query->bindValue(':c', $venda->getCliente()->getId(),PDO::PARAM_INT);
                 $query->bindValue(':i', $venda->getId(),PDO::PARAM_INT);
 
                 if(!$query->execute()){
